@@ -1,16 +1,12 @@
 package com.objis.spring.demodomaine;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Classe Formation
  *
  *
- * @author Jimmy Rakotoson, José-Alexandre Giry
  *
  */
 
@@ -74,5 +70,9 @@ public class Formation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String toString() {
+        return this.theme;
     }
 }

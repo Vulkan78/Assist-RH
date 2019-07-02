@@ -11,7 +11,6 @@ import java.util.Date;
  * Classe Manager qui hérite de la classe Personne
  * Le manager valide les demandes de formations des salariés
  * Le manager est géré via la classe ManagerService
- * @author Jimmy Rakotoson, José-Alexandre Giry
  *
  */
 

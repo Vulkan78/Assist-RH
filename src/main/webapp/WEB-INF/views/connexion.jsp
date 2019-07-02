@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Connexion</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
@@ -17,15 +17,19 @@
 <body>
     <div>
         <div class="container">
-            <div class="row" style="margin-top:2em;">
-                <div class="col"><img class="float-right noselect" src="assets/img/Assist-RH.png" id="logo-xs" style="width:115px;"><a class="btn btn-warning" role="button" href="connexion.html">Déconnexion</a></div>
+            <div class="row">
+                <div class="col-md-12" style="margin-top:8em;"><img class="d-block m-auto noselect" src="assets/img/Assist-RH.png" style="width:150px; box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, .2);"></div>
             </div>
         </div>
     </div>
     <div>
         <div class="container">
-            <div class="row mx-auto" style="max-width:600px;">
-                <div class="col-md-12 d-flex outline" style="margin-top:13em;outline-offset:2em;"><a class="btn btn-dark btn-lg d-flex justify-content-center align-items-center" role="button" href="formation-catalogue.html" style="width:260px;height:72px;margin-left:auto;margin-right:auto;">Formation</a></div>
+            <div class="row">
+                <div class="col-md-12 d-block mx-auto" style="margin-top:5em;width:auto;max-width:600px;padding-right:0px;padding-left:0px;">
+                    <form action="index.html" method="post">
+                        <div class="form-group"><label>Adresse e-mail</label><input class="form-control" type="email" value="r.tourrou@ensup.eu"></div>
+                        <div class="form-group"><label>Mot de passe</label><input class="form-control" type="password" value="zefezrfezrf"></div><button class="btn btn-dark d-block ml-auto" type="submit" style="margin-top:2.5em;">Valider</button></form>
+                </div>
             </div>
         </div>
     </div>

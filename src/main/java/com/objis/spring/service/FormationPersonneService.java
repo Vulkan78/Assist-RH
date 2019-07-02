@@ -6,14 +6,13 @@ import com.objis.spring.demodomaine.Salarie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Services de la classe FormationPersonnePersonne
+ * Services de la classe FormationPersonnePersonne (demandes de formation)
  * CRUD
  *
  * @author Jimmy Rakotoson, José-Alexandre Giry
@@ -26,16 +25,16 @@ public class FormationPersonneService {
     private IFormationPersonneDao iFormationPersonneDao;
 
     /**
-     * Recupère les formationPersonnes en base
+     * Recupère les demandes (formationPersonnes) en base
      *
-     * @return Une liste de FormationPersonnes
+     * @return Une liste des demandes (FormationPersonnes)
      */
     public List<FormationPersonne> getAll() {
         return iFormationPersonneDao.findAll();
     }
 
     /**
-     * Injecte la formationPersonne en base
+     * Injecte la demande (formationPersonne) en base
      *
      * @param newformationPersonne
      */
@@ -44,16 +43,16 @@ public class FormationPersonneService {
     }
 
     /**
-     * Supprime leaformationPersonne de la base
+     * Supprime la demande (formationPersonne) de la base
      *
-     * @param id ID du formationPersonne
+     * @param id ID de formationPersonne
      */
     public void deleteFormationPersonne(Integer id) {
         iFormationPersonneDao.deleteById(id);
     }
 
     /**
-     * Récupère la formationPersonne de la base à mettre à jour
+     * Récupère la demande(formationPersonne) de la base à mettre à jour
      *
      * @param id ID de la formationPersonne
      * @return FormationPersonne
@@ -63,7 +62,7 @@ public class FormationPersonneService {
     }
 
     /**
-     * Met à jour la formationPersonne dans la base
+     * Met à jour la demande (formationPersonne) dans la base
      *
      * @param formationPersonne
      */

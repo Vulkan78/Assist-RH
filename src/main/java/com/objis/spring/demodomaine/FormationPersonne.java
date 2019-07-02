@@ -8,20 +8,26 @@ import java.util.Date;
  * Classe FormationPersonne
  * Correspond aux demandes des salariés
  * Elle lie un salarié à une formation. Le manager devra valider la demande.
- * @author Jimmy Rakotoson, José-Alexandre Giry
  *
  */
 
 @Entity
+@Table(name = "FormationPersonne")
 public class FormationPersonne implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Integer id;
-    @OneToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "salarie_id", referencedColumnName = "id")
     public Salarie salarie;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "formation_id", referencedColumnName = "id")
     public Formation formation;
+
     public String statutDemande;
     public Date dateDemande;
     public Integer evaluation;

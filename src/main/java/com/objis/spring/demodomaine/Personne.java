@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @author Jimmy Rakotoson, José-Alexandre Giry
  * Classe mère des classes Salarie et Manager
  */
 

@@ -5,6 +5,7 @@ import com.objis.spring.demodomaine.Salarie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
  *
  */
 @Service
-public class SalarieService {
+public class SalarieService implements Serializable {
 
     @Autowired
     private ISalarieDao iSalarieDao;
@@ -51,7 +52,7 @@ public class SalarieService {
      *              ID du salarié
      * @return Salarie
      */
-    public Salarie updateSalarie(Integer id){
+    public Salarie getSalarie(Integer id){
         return iSalarieDao.getOne(id);
     }
 
