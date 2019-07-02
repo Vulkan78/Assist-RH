@@ -2,6 +2,7 @@ package com.objis.spring.demodomaine;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -75,8 +76,11 @@ public class FormationPersonne implements Serializable {
         this.statutDemande = statutDemande;
     }
 
-    public Date getDateDemande() {
-        return dateDemande;
+    public String getDateDemande() {
+        SimpleDateFormat formater = null;
+        formater = new SimpleDateFormat("dd/MM/yyyy");
+        String newDate = formater.format(dateDemande);
+        return newDate;
     }
 
     public void setDateDemande(Date dateDemande) {

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assist-RH</title>
+    <title>Connexion</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
@@ -22,11 +26,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 d-block mx-auto" style="margin-top:5em;width:auto;max-width:600px;padding-right:0px;padding-left:0px;">
-                    <form action="index.html" method="get">
-                        <div class="form-group"><label>Adresse e-mail</label><input class="form-control" type="email" value="r.guez@ensup.eu"></div>
-                        <div class="form-group"><label>Mot de passe</label><input class="form-control" type="password" value="zefezrfezrf"></div>
-                        <div class="btn-group float-right" role="group"><a class="btn btn-success d-block ml-auto btn-rh" role="button" href="rh-accueil.html" style="margin-top:2.5em;">Espace RH</a><button class="btn btn-dark d-block ml-auto" type="submit" style="margin-top:2.5em;">Valider</button></div>
-                    </form>
+                    <form action="index.html" method="post">
+                        <div class="form-group"><label>Adresse e-mail</label><input class="form-control" type="email" value="r.tourrou@ensup.eu"></div>
+                        <div class="form-group"><label>Mot de passe</label><input class="form-control" type="password" value="zefezrfezrf"></div><button class="btn btn-dark d-block ml-auto" type="submit" style="margin-top:2.5em;">Valider</button></form>
                 </div>
             </div>
         </div>

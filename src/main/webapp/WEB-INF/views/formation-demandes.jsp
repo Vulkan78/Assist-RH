@@ -56,44 +56,42 @@
                                         <th>#</th>
                                         <th>Thème</th>
                                         <th>Date de début</th>
-                                        <th>Date de demande</th>
                                         <th>Durée</th>
                                         <th>Description</th>
+                                        <th>Date de demande</th>
                                         <th>Statut</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>837123</td>
-                                        <td>Sécurité informatique<br></td>
-                                        <td>09 sept. 2019<br></td>
-                                        <td>01 juil. 2019<br></td>
-                                        <td>4j</td>
-                                        <td>Concepts et méthodes de pr…</td>
-                                        <td><span class="badge badge-light">Attente</span></td>
-                                        <td><a href="formation-detail.html"><i class="fa fa-pencil-square fa-lg"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>832499</td>
-                                        <td>Gestion de projet</td>
-                                        <td>14 sept. 2019</td>
-                                        <td>01 juil. 2019<br></td>
-                                        <td>3j</td>
-                                        <td>Méthodes de gestion agile de… </td>
-                                        <td><span class="badge badge-danger">Refusée</span></td>
-                                        <td><a href="#"><i class="fa fa-pencil-square fa-lg"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>831233</td>
-                                        <td>Analyse du besoin</td>
-                                        <td>14 sept. 2019</td>
-                                        <td>01 juil. 2019<br></td>
-                                        <td>3j</td>
-                                        <td>Rédaction du cahier des char… </td>
-                                        <td><span class="badge badge-success">Acceptée</span></td>
-                                        <td><a href="#"><i class="fa fa-pencil-square fa-lg"></i></a></td>
-                                    </tr>
+                                <c:forEach items="${formationPersonneListStatut}" var="formationPersonneListStatut">
+                                <tr>
+                                    <td>${formationPersonneListStatut.id}</td>
+                                    <c:forEach var="splt" items="${fn:split(formationPersonneListStatut.formation,'+')}">
+                                        <td>${splt}</td>
+                                    </c:forEach>
+                                    <td>${formationPersonneListStatut.dateDemande}</td>
+                                    <td>
+                                        <c:choose>
+                                        <c:when test="${formationPersonneListStatut.statutDemande=='Approuvée'}">
+                                        <span class="badge badge-success">
+                                        </c:when>
+                                        <c:when test="${formationPersonneListStatut.statutDemande=='Réalisée'}">
+                                        <span class="badge badge-success">
+                                        </c:when>
+                                        <c:when test="${formationPersonneListStatut.statutDemande=='Demandée'}">
+                                        <span class="badge badge-light">
+                                        </c:when>
+                                        <c:otherwise>
+                                        <span class="badge badge-danger">
+                                        </c:otherwise>
+                                        </c:choose>
+                                        ${formationPersonneListStatut.statutDemande}
+                                        </span>
+                                    </td>
+                                    <td><a href="formation-detail.html"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                                </c:forEach>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

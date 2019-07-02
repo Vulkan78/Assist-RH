@@ -56,34 +56,40 @@
                                         <th>#</th>
                                         <th>Thème</th>
                                         <th>Date de début</th>
-                                        <th>Date de demande</th>
                                         <th>Durée</th>
                                         <th>Description</th>
+                                        <th>Date de demande</th>
                                         <th>Statut</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>839288</td>
-                                        <td>Qualité de code<br></td>
-                                        <td>29 juin 2019<br></td>
-                                        <td>12 juin 2019<br></td>
-                                        <td>6j</td>
-                                        <td>Bonnes pratiques dans l’écri… </td>
-                                        <td><span class="badge badge-danger">Refusée</span></td>
-                                        <td><a href="formation-detail.html"><i class="fa fa-pencil-square fa-lg"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>832904</td>
-                                        <td>Développement mobile</td>
-                                        <td>21 juin 2019</td>
-                                        <td>09 juin 2019<br></td>
-                                        <td>8j</td>
-                                        <td>Développement d’applicat... </td>
-                                        <td><span class="badge badge-primary">Réalisée</span></td>
-                                        <td><a href="#"><i class="fa fa-pencil-square fa-lg"></i></a></td>
-                                    </tr>
+                                <c:forEach items="${formationPersonneList}" var="formationPersonneList">
+                                <tr>
+                                    <td>${formationPersonneList.id}</td>
+                                    <c:forEach var="splt" items="${fn:split(formationPersonneList.formation,'+')}">
+                                    <td>${splt}</td>
+                                    </c:forEach>
+                                    <td>${formationPersonneList.dateDemande}</td>
+                                    <td>
+                                        <c:choose>
+                                        <c:when test="${formationPersonneList.statutDemande=='Approuvée'}">
+                                        <span class="badge badge-success">
+                                        </c:when>
+                                        <c:when test="{param.enter=='Demandée'}">
+                                        <span class="badge badge-light">
+                                        </c:when>
+                                        <c:otherwise>
+                                        <span class="badge badge-danger">
+                                        </c:otherwise>
+                                        </c:choose>
+                                        ${formationPersonneList.statutDemande}
+                                        </span>
+                                    </td>
+                                    <!--<td><span class="badge badge-danger">Refusée</span></td>-->
+                                    <!--<td><span class="badge badge-light">Acceptée</span></td>-->
+                                    <td><a href="formation-detail.html"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>

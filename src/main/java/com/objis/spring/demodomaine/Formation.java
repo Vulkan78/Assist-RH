@@ -1,6 +1,7 @@
 package com.objis.spring.demodomaine;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -48,8 +49,11 @@ public class Formation {
         this.theme = theme;
     }
 
-    public Date getDateDebut() {
-        return dateDebut;
+    public String getDateDebut() {
+        SimpleDateFormat formater = null;
+        formater = new SimpleDateFormat("dd/MM/yyyy");
+        String newDate = formater.format(dateDebut);
+        return newDate;
     }
 
     public void setDateDebut(Date dateDebut) {
@@ -73,6 +77,6 @@ public class Formation {
     }
 
     public String toString() {
-        return this.theme;
+        return this.theme+ "+" + this.getDateDebut()+ "+" + this.duree+ "+" + this.description;
     }
 }
