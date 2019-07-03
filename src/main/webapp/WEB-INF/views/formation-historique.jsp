@@ -55,10 +55,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Thème</th>
-                                        <th>Date de début</th>
+                                        <th>Début</th>
                                         <th>Durée</th>
                                         <th>Description</th>
-                                        <th>Date de demande</th>
+                                        <th>Demande</th>
                                         <th>Statut</th>
                                         <th></th>
                                     </tr>
@@ -73,6 +73,9 @@
                                     <td>${formationPersonneList.dateDemande}</td>
                                     <td>
                                         <c:choose>
+                                        <c:when test="${formationPersonneList.statutDemande=='Réalisée'}">
+                                        <span class="badge badge-primary">
+                                        </c:when>
                                         <c:when test="${formationPersonneList.statutDemande=='Approuvée'}">
                                         <span class="badge badge-success">
                                         </c:when>
@@ -86,7 +89,7 @@
                                         ${formationPersonneList.statutDemande}
                                         </span>
                                     </td>
-                                    <td><a href="formation-detail.html?id=${formationPersonneList.id}"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                                    <td><a href="formation-detail.html?id=${formationPersonneList.id}"><i class="fa fa-external-link-square fa-lg"></i></a></td>
                                     </c:forEach>
                                 </tbody>
                             </table>

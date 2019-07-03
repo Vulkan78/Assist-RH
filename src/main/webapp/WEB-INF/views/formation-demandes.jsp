@@ -55,10 +55,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Thème</th>
-                                        <th>Date de début</th>
+                                        <th>Début</th>
                                         <th>Durée</th>
                                         <th>Description</th>
-                                        <th>Date de demande</th>
+                                        <th>Demande</th>
                                         <th>Statut</th>
                                         <th></th>
                                     </tr>
@@ -73,10 +73,10 @@
                                     <td>${formationPersonneListStatut.dateDemande}</td>
                                     <td>
                                         <c:choose>
-                                        <c:when test="${formationPersonneListStatut.statutDemande=='Approuvée'}">
-                                        <span class="badge badge-success">
-                                        </c:when>
                                         <c:when test="${formationPersonneListStatut.statutDemande=='Réalisée'}">
+                                        <span class="badge badge-primary">
+                                        </c:when>
+                                        <c:when test="${formationPersonneListStatut.statutDemande=='Approuvée'}">
                                         <span class="badge badge-success">
                                         </c:when>
                                         <c:when test="${formationPersonneListStatut.statutDemande=='Demandée'}">
@@ -89,7 +89,7 @@
                                         ${formationPersonneListStatut.statutDemande}
                                         </span>
                                     </td>
-                                    <td><a href="formation-detail.html"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                                    <td><a href="#"><i class="fa fa-pencil-square fa-lg"></i></a></td>
                                 </c:forEach>
                                 </tr>
                                 </tbody>
