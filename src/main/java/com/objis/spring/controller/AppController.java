@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -124,8 +126,18 @@ public class AppController {
         ModelAndView MAV = new ModelAndView();
         MAV.setViewName("rh-formation");
         //Premier onglet
-        MAV.addObject("formationList",this.formationService.getAll());
+        MAV.addObject("formationList",this.formationService.getAll(new Date()));
         return MAV;
+    }
+
+    /**
+     * Affiche les résultats de la recherche du catalogue de formation du service RH
+     */
+    @PostMapping("/rh-search")
+    ModelAndView validateSearchRh(@RequestParam String keyword) {
+        final ModelAndView mav = new ModelAndView("rh-formation");
+        mav.addObject("formationList", this.formationService.findFormation(keyword));
+        return mav;
     }
 
     /**
@@ -136,7 +148,7 @@ public class AppController {
         ModelAndView MAV = new ModelAndView();
         MAV.setViewName("formation-catalogue");
         //Premier onglet
-        MAV.addObject("formationList",this.iFormationDao.findByDateDebutAfter(new Date()));
+        MAV.addObject("formationList",this.formationService.getAll(new Date()));
         return MAV;
     }
 
@@ -208,25 +220,28 @@ public class AppController {
     /**
      * Valide la création de la formation et l'injecte dans la base
      */
-    @RequestMapping(method = RequestMethod.POST, path = "/formation")
-    public String validateFormation(Integer id, @RequestParam(name="nom") String theme,
-                                 @RequestParam(name="prenom") String description,
-                                 @RequestParam(name="adresse") Date dateDebut,
-                                 @RequestParam(name="codePostal") Integer duree){
+    @RequestMapping(method = RequestMethod.POST, path = "/rh-formation")
+    public String validateFormation(@RequestParam(name="theme") String theme,
+                                 @RequestParam(name="description") String description,
+                                 @RequestParam(name="datedebut") String dateDebutStr,
+                                 @RequestParam(name="duree") Integer duree) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateDebut = formatter.parse(dateDebutStr);
+        System.out.println(dateDebutStr);
+        System.out.println(dateDebut);
         final Formation newFormation = new Formation(theme, dateDebut, duree, description);
         this.formationService.createFormation(newFormation);
-        //return this.index();
         return "redirect:/rh-formation.html";
     }
 
     /**
      * Supprime la formation de la base
      */
-    @GetMapping("/delete")
+    @GetMapping("/deleteformation")
     public String delete(Integer id){
         this.formationService.deleteFormation(id);
         //return this.index();
-        return "redirect:/formations.html";
+        return "redirect:/rh-formation.html";
     }
 
     /**

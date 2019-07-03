@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,8 +27,8 @@ public class FormationService {
      *
      * @return Une liste de Formations
      */
-    public List<Formation> getAll() {
-        return iFormationDao.findAll();
+    public List<Formation> getAll(Date date) {
+        return iFormationDao.findByDateDebutAfter(date);
     }
 
     /**

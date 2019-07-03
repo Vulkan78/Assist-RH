@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -18,15 +19,15 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Ajouter une formation</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                 <div class="modal-body">
-                    <form>
+                    <form action ="rh-formation" method="post">
                         <div class="form-row">
                             <div class="col" style="padding:2em;">
                                 <div class="form-group"><label>Thème</label><input class="form-control form-control-sm" type="text" name="theme" required=""></div>
                                 <div class="form-group"><label>Durée</label><input class="form-control form-control-sm" type="text" name="duree" required=""></div>
-                                <div class="form-group"><label>Téléphone</label><input class="form-control form-control-sm" type="tel" name="telephone" required=""></div>
+                                <div class="form-group"><label>Téléphone</label><input class="form-control form-control-sm" type="tel" name="telephone"></div>
                             </div>
                             <div class="col" style="padding:2em;">
-                                <div class="form-group"><label>Date de début</label><input class="form-control form-control-sm" type="text" name="date-debut" required=""></div>
+                                <div class="form-group"><label>Date de début</label><input class="form-control form-control-sm" type="date" name="datedebut" required=""></div>
                                 <div class="form-group"><label>Description</label><textarea class="form-control" name="description" style="height:7em;"></textarea>
                                     <div class="btn-group float-right" role="group" style="margin-top:1em;"><button class="btn btn-dark float-right" type="button" data-dismiss="modal">Retour</button><button class="btn btn-secondary d-inline-block float-right" type="submit" style="margin-left:0.1em;">Ajouter</button></div>
                                 </div>
@@ -69,15 +70,15 @@
         <div class="container" style="padding-left:32px;padding-right:25px;">
             <div class="row outline">
                 <div class="col outline" style="padding:2em;">
-                    <form>
-                        <div class="form-group d-flex"><input class="form-control squared-border-right" type="search" placeholder="Rechercher un thème..." style="max-width:20em;"><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></div>
+                    <form action="rh-search.html" method="post">
+                        <div class="form-group d-flex"><input class="form-control squared-border-right" name="keyword" placeholder="Rechercher un thème..." style="max-width:20em;"><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></div>
                         <div class="table-responsive">
                             <table class="table table-striped table-dark">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Thème</th>
-                                        <th>Date de début</th>
+                                        <th>Début</th>
                                         <th>Durée</th>
                                         <th>Description</th>
                                         <th></th>
@@ -85,33 +86,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach items="${formationList}" var="formation">
                                     <tr>
-                                        <td>837481</td>
-                                        <td>Comptabilité analytique<br></td>
-                                        <td>12 sept. 2019<br></td>
-                                        <td>5j</td>
-                                        <td>Étude de la rentabilité d’une entreprise.</td>
-                                        <td><a href="#"><i class="fa fa-pencil-square fa-lg"></i></a></td>
-                                        <td><a href="#"><i class="fa fa-remove fa-lg"></i></a></td>
+                                        <td>${formation.id}</td>
+                                        <td>${formation.theme}</td>
+                                        <td>${formation.dateDebut}</td>
+                                        <td>${formation.duree}</td>
+                                        <td>${formation.description}</td>
+                                            <%--<td><a href="formation-detail.html?id=${formation.id}"><i class="fa fa-external-link-square fa-lg"></i></a></td>--%>
+                                        <td><a href=formation-detail.html?id=839288"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                                        <td><a href="deleteformation.html?id=${formation.id}"><i class="fa fa-remove fa-lg"></i></a></td>
                                     </tr>
-                                    <tr>
-                                        <td>837482</td>
-                                        <td>Opérations de change</td>
-                                        <td>28 sept. 2019</td>
-                                        <td>2j</td>
-                                        <td>Produits et règles de base des opérations. </td>
-                                        <td><a href="#"><i class="fa fa-pencil-square fa-lg"></i></a></td>
-                                        <td><a href="#"><i class="fa fa-remove fa-lg"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>837483</td>
-                                        <td>Développement JAVA</td>
-                                        <td>03 oct. 2019</td>
-                                        <td>4j</td>
-                                        <td>Initiation au développements logiciels via le langage Java. </td>
-                                        <td><a href="#"><i class="fa fa-pencil-square fa-lg"></i></a></td>
-                                        <td><a href="#"><i class="fa fa-remove fa-lg"></i></a></td>
-                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div><a class="btn btn-dark float-left d-flex ml-auto" role="button" href="javascript:$('#create-formation').modal()">Ajouter</a>

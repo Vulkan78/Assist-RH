@@ -70,7 +70,7 @@
                                         <td>${formation.duree}</td>
                                         <td>${formation.description}</td>
                                         <%--<td><a href="formation-detail.html?id=${formation.id}"><i class="fa fa-external-link-square fa-lg"></i></a></td>--%>
-                                        <td><a href="formation-detail.html?id=839288"><i class="fa fa-external-link-square fa-lg"></i></a></td>
+                                        <td><a href="formation-detail.html?id=${formation.id}"><i class="fa fa-external-link-square fa-lg"></i></a></td>
                                     </tr>
                                   </c:forEach>
                                 </tbody>
