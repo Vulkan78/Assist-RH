@@ -5,6 +5,7 @@ import com.objis.spring.demodomaine.Formation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,13 +67,14 @@ public class FormationService {
         return this.iFormationDao.save(formation);
     }
 
-    /*public List<Formation> findFormation(String keyword) {
+    public List<Formation> findFormation(String keyword) {
         List<Formation> results = new ArrayList<Formation>();
         String[] keywords = keyword.split("[ -]");
         for(String word: keywords) {
-            results.addAll(this.iFormationDao.findByNomContaining(word));
+            results.addAll(this.iFormationDao.findByThemeContaining(word));
         }
         return results;
-    }*/
+    }
+
 
 }

@@ -43,6 +43,16 @@ public class FormationPersonneService {
     }
 
     /**
+     * Récupère le salarie de la base à mettre à jour
+     * @param id
+     *              ID du salarié
+     * @return Salarie
+     */
+    public FormationPersonne getFormationPersonne(Integer id){
+        return iFormationPersonneDao.getOne(id);
+    }
+
+    /**
      * Supprime la demande (formationPersonne) de la base
      *
      * @param id ID de formationPersonne

@@ -47,8 +47,8 @@
         <div class="container" style="padding-left:32px;padding-right:25px;">
             <div class="row outline">
                 <div class="col outline" style="padding:2em;">
-                    <form>
-                        <div class="form-group d-flex"><input class="form-control squared-border-right" type="search" placeholder="Rechercher un thème..." style="max-width:20em;"><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></div>
+                    <form method="post" action="search.html">
+                        <div class="form-group d-flex"><input class="form-control squared-border-right" type="search" placeholder="Rechercher un thème..." style="max-width:20em;" name="keyword"><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></div>
                         <div class="table-responsive">
                             <table class="table table-striped table-dark">
                                 <thead>

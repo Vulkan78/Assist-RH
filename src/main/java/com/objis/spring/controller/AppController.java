@@ -2,23 +2,23 @@ package com.objis.spring.controller;
 import com.objis.spring.demodao.IFormationPersonneDao;
 import com.objis.spring.demodomaine.Formation;
 import com.objis.spring.demodomaine.FormationPersonne;
-import com.objis.spring.demodomaine.Manager;
 import com.objis.spring.demodomaine.Salarie;
 import com.objis.spring.service.FormationPersonneService;
 import com.objis.spring.service.SalarieService;
-import com.objis.spring.service.ManagerService;
 import com.objis.spring.service.FormationService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +34,50 @@ public class AppController {
     private FormationService formationService;
 
     @Autowired
+    private FormationPersonneService formationPersonneService;
+
+    @Autowired
     private IFormationPersonneDao iFormationPersonneDao;
+
+    /**
+     * Affiche la page d'authentification
+     */
+    @RequestMapping({"/login"})
+    public ModelAndView login (){
+        ModelAndView MAV = new ModelAndView();
+        MAV.setViewName("login");
+        return MAV;
+    }
+
+    @RequestMapping({"/checklogin"})
+    public ModelAndView test (HttpServletRequest request, HttpServletResponse response){ //throws ServletException, IOException {
+        ModelAndView MAV = new ModelAndView();
+        MAV.setViewName("aaaa");
+        return MAV;
+
+
+        /*String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        if (username == null || password == null) {
+
+            MAV.setViewName("/index");
+        }else{
+
+            // Here you put the check on the username and password
+            if (username.toLowerCase().trim().equals("admin") && password.toLowerCase().trim().equals("admin")) {
+                MAV.setViewName("Welcome " + username );
+                HttpSession session = request.getSession ();
+                session.setAttribute("username", username);
+                MAV.setViewName("/accueil");
+            }
+            else
+            {
+                MAV.setViewName("/incorrect");
+            }
+        }
+        return MAV;*/
+    }
 
     /**
      * Affiche la page d'authentification
@@ -67,16 +110,6 @@ public class AppController {
     }
 
     /**
-     * Affiche les 4 modules du service RH
-     */
-    @RequestMapping({"/rh-accueil-4-modules"})
-    public ModelAndView rhAccueil4modules (){
-        ModelAndView MAV = new ModelAndView();
-        MAV.setViewName("rh-accueil-4-modules");
-        return MAV;
-    }
-
-    /**
      * Affiche la page de gestion des compétences du service RH
      */
     @RequestMapping({"/rh-competences"})
@@ -97,12 +130,14 @@ public class AppController {
     }
 
     /**
-     * Affiche le module de formation du service RH
+     * Affiche le module de gestion de formation du service RH
      */
     @RequestMapping({"/rh-formation"})
     public ModelAndView rhFormation (){
         ModelAndView MAV = new ModelAndView();
         MAV.setViewName("rh-formation");
+        //Premier onglet
+        MAV.addObject("formationList",this.formationService.getAll());
         return MAV;
     }
 
@@ -119,13 +154,23 @@ public class AppController {
     }
 
     /**
+     * Affiche les résultats de la recherche du catalogue de formation
+     */
+    @PostMapping("/search")
+    ModelAndView validateSearch(@RequestParam String keyword) {
+        final ModelAndView mav = new ModelAndView("formation-catalogue");
+        mav.addObject("formationList", this.formationService.findFormation(keyword));
+        return mav;
+    }
+
+    /**
      * Affiche les demandes de formation en cours du salarié
      */
     @RequestMapping({"/formation-demandes"})
     public ModelAndView formationDemandes (){
         ModelAndView MAV = new ModelAndView();
         MAV.setViewName("formation-demandes");
-        Salarie salarie = this.salarieService.getSalarie(2); //A récupérer en dynamique après connexion
+        Salarie salarie = this.salarieService.getSalarie(1); //A récupérer en dynamique après connexion
         //Deuxieme onglet
         List<FormationPersonne> listeFormationPersonne = this.iFormationPersonneDao.findBySalarieAndStatutDemande(salarie, "Demandée");
         MAV.addObject("formationPersonneListStatut",listeFormationPersonne);
@@ -139,7 +184,7 @@ public class AppController {
     public ModelAndView formationHistorique (){
         ModelAndView MAV = new ModelAndView();
         MAV.setViewName("formation-historique");
-        Salarie salarie = this.salarieService.getSalarie(2); //A récupérer en dynamique après connexion
+        Salarie salarie = this.salarieService.getSalarie(1); //A récupérer en dynamique après connexion
         //Troisième onglet
         MAV.addObject("formationPersonneList",this.iFormationPersonneDao.findBySalarieAndStatutDemandeNot(salarie, "Demandée"));
         return MAV;
@@ -158,11 +203,15 @@ public class AppController {
     /**
      *  Affiche les détails de la formation
      */
-    @RequestMapping("/detail_formation")
-    public ModelAndView updateFormation(){
-        ModelAndView MAV = new ModelAndView();
-        MAV.setViewName("detail_formation");
-        return MAV;
+    @GetMapping("/formation-detail")
+    public ModelAndView formationDetail(Integer id){
+        ModelAndView mav = new ModelAndView("formation-detail");
+        FormationPersonne demande = this.formationPersonneService.getFormationPersonne(id);
+        //Formation formation = demande.getFormation();
+        Hibernate.initialize(demande);
+        mav.addObject("formation-detail",demande);
+        //return this.index();
+        return mav;
     }
 
     /**

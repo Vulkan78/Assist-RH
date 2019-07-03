@@ -76,7 +76,7 @@
                                         <c:when test="${formationPersonneList.statutDemande=='Approuvée'}">
                                         <span class="badge badge-success">
                                         </c:when>
-                                        <c:when test="{param.enter=='Demandée'}">
+                                        <c:when test="${formationPersonneList.statutDemande=='Demandée'}">
                                         <span class="badge badge-light">
                                         </c:when>
                                         <c:otherwise>
@@ -86,9 +86,7 @@
                                         ${formationPersonneList.statutDemande}
                                         </span>
                                     </td>
-                                    <!--<td><span class="badge badge-danger">Refusée</span></td>-->
-                                    <!--<td><span class="badge badge-light">Acceptée</span></td>-->
-                                    <td><a href="formation-detail.html"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                                    <td><a href="formation-detail.html?id=${formationPersonneList.id}"><i class="fa fa-pencil-square fa-lg"></i></a></td>
                                     </c:forEach>
                                 </tbody>
                             </table>
