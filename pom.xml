@@ -8,12 +8,12 @@
         <version>2.1.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.objis.spring.demo-spring-Maven</groupId>
-    <artifactId>demo-spring-Maven</artifactId>
+    <groupId>com.objis.spring.assist-rh</groupId>
+    <artifactId>assist-rh</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>demoV1</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Application de gestion de ressources humaines</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -63,7 +63,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.36</version>
+            <version>8.0.11</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>

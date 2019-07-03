@@ -7,5 +7,6 @@ import java.util.List;
 public interface ISalarieDao extends JpaRepository<Salarie, Integer> {
 
     List<Salarie> findByNomContaining(String keyword);
+    List<Salarie> findByMail(String mail);
 
 }

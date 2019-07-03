@@ -55,10 +55,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Thème</th>
-                                        <th>Date de début</th>
+                                        <th>Début</th>
                                         <th>Durée</th>
                                         <th>Description</th>
-                                        <th>Date de demande</th>
+                                        <th>Demande</th>
                                         <th>Statut</th>
                                         <th></th>
                                     </tr>
@@ -75,6 +75,9 @@
                                         <c:choose>
                                         <c:when test="${formationPersonneList.statutDemande=='Approuvée'}">
                                         <span class="badge badge-success">
+                                        </c:when>
+                                        <c:when test="${formationPersonneList.statutDemande=='Réalisée'}">
+                                        <span class="badge badge-primary">
                                         </c:when>
                                         <c:when test="${formationPersonneList.statutDemande=='Demandée'}">
                                         <span class="badge badge-light">
