@@ -55,7 +55,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Thème</th>
-                                        <th>Date de début</th>
+                                        <th>Début</th>
                                         <th>Durée</th>
                                         <th>Description</th>
                                         <th></th>
@@ -67,9 +67,9 @@
                                         <td>${formation.id}</td>
                                         <td>${formation.theme}</td>
                                         <td>${formation.dateDebut}</td>
-                                        <td>${formation.duree} j</td>
+                                        <td>${formation.duree}</td>
                                         <td>${formation.description}</td>
-                                        <td><a href="#"><i class="fa fa-pencil-square fa-lg"></i></a></td>
+                                        <td><a href="#"><i class="fa fa-external-link-square fa-lg"></i></a></td>
                                     </tr>
                                   </c:forEach>
                                 </tbody>
