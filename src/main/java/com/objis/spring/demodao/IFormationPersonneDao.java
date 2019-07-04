@@ -1,4 +1,5 @@
 package com.objis.spring.demodao;
+import com.objis.spring.demodomaine.Formation;
 import com.objis.spring.demodomaine.FormationPersonne;
 import com.objis.spring.demodomaine.Manager;
 import com.objis.spring.demodomaine.Salarie;
@@ -15,5 +16,6 @@ public interface IFormationPersonneDao extends JpaRepository<FormationPersonne, 
     List<FormationPersonne> findBySalarie(Salarie salarie);
     List<FormationPersonne> findBySalarieAndStatutDemande(Salarie salarie, String statut);
     List<FormationPersonne> findBySalarieAndStatutDemandeNot(Salarie salarie, String statut);
-
+    FormationPersonne findBySalarieAndFormation(Salarie salarie, Formation formation);
 }
+

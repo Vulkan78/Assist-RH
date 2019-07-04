@@ -8,4 +8,5 @@ import java.util.List;
 public interface IManagerDao extends JpaRepository<Manager, Integer> {
 
     List<Manager> findByNomContaining(String keyword);
+    List<Manager> findByMail(String mail);
 }

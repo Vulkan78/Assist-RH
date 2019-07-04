@@ -1,11 +1,14 @@
 package com.objis.spring.controller;
 import com.objis.spring.demodao.IFormationDao;
 import com.objis.spring.demodao.IFormationPersonneDao;
+import com.objis.spring.demodao.IManagerDao;
 import com.objis.spring.demodao.ISalarieDao;
 import com.objis.spring.demodomaine.Formation;
 import com.objis.spring.demodomaine.FormationPersonne;
+import com.objis.spring.demodomaine.Manager;
 import com.objis.spring.demodomaine.Salarie;
 import com.objis.spring.service.FormationPersonneService;
+import com.objis.spring.service.ManagerService;
 import com.objis.spring.service.SalarieService;
 import com.objis.spring.service.FormationService;
 import org.hibernate.Hibernate;
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +37,8 @@ public class AppController {
     @Autowired
     private SalarieService salarieService;
     @Autowired
+    private ManagerService managerService;
+    @Autowired
     private FormationService formationService;
     @Autowired
     private IFormationPersonneDao iFormationPersonneDao;
@@ -42,29 +48,42 @@ public class AppController {
     private FormationPersonneService formationPersonneService;
     @Autowired
     private ISalarieDao iSalarieDao;
+    @Autowired
+    private IManagerDao iManagerDao;
 
     @PostMapping("/checklogin")
-    public ModelAndView checklogin (@RequestParam(name="mail") String theme, @RequestParam(name="password") String description,
+    public ModelAndView checklogin (@RequestParam(name="mail") String mail, @RequestParam(name="password") String password,
                                     HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         ModelAndView MAV = new ModelAndView();
-        String mail = request.getParameter("mail");
-        String password = request.getParameter("password");
+        HttpSession session = request.getSession();
         List<Salarie> salaries = this.iSalarieDao.findByMail(mail);
+        List<Manager> managers = this.iManagerDao.findByMail(mail);
+
         if(salaries.size() > 0) {
             Salarie salarie = salaries.get(0);
             if (password.equals(salarie.getPassword())) {
-                HttpSession session = request.getSession();
+
                 session.setAttribute("id", salaries.get(0).getId());
                 MAV.setViewName("index");
             } else {
                 MAV.setViewName("connexion");
             }
         }
-        else
-            {
+        else {
+
+            if (managers.size() > 0) {
+                Manager manager = managers.get(0);
+                if (password.equals(manager.getPassword())) {
+
+                    session.setAttribute("id", managers.get(0).getId());
+                    MAV.setViewName("index");
+                } else {
+                    MAV.setViewName("connexion");
+                }
+            } else {
                 MAV.setViewName("connexion");
             }
-
+        }
         return MAV;
     }
 
@@ -99,12 +118,34 @@ public class AppController {
     }
 
     /**
+     * Affiche la page budget du service RH
+     */
+    @RequestMapping({"/rh-budget"})
+    public ModelAndView rhBudget (){
+        ModelAndView MAV = new ModelAndView();
+        MAV.setViewName("rh-budget");
+        return MAV;
+    }
+
+    /**
+     * Affiche la page depenses du service RH
+     */
+    @RequestMapping({"/rh-depenses"})
+    public ModelAndView rhDepenses (){
+        ModelAndView MAV = new ModelAndView();
+        MAV.setViewName("rh-depenses");
+        return MAV;
+    }
+
+    /**
      * Affiche la page de gestion des compétences du service RH
      */
     @RequestMapping({"/rh-competences"})
-    public ModelAndView rhCompetences (){
+    public ModelAndView rhCompetence (){
         ModelAndView MAV = new ModelAndView();
         MAV.setViewName("rh-competences");
+        //Premier onglet
+        MAV.addObject("salarieList",this.salarieService.getAll());
         return MAV;
     }
 
@@ -207,13 +248,22 @@ public class AppController {
      *  Affiche les détails de la formation
      */
     @GetMapping("/formation-detail")
-    public ModelAndView formationDetail(Integer id){
+    public ModelAndView formationDetail(Integer id, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         ModelAndView mav = new ModelAndView("formation-detail");
-        FormationPersonne demande = this.formationPersonneService.getFormationPersonne(id);
-        //Formation formation = demande.getFormation();
+        HttpSession session = request.getSession(true);
+        Integer idUser = (int)session.getAttribute("id");
+        Salarie salarie = this.salarieService.getSalarie(idUser);
+        Formation formation = this.formationService.getFormation(id);
+
+        FormationPersonne demande = this.formationPersonneService.getBySalarieFormation(salarie, formation);
+        ArrayList<Formation> formations = new ArrayList();
+        formations.add(formation);
+        ArrayList<FormationPersonne> demandes = new ArrayList();
         Hibernate.initialize(demande);
-        mav.addObject("formation-detail",demande);
-        //return this.index();
+        demandes.add(demande);
+
+        mav.addObject("formationDetail",formations);
+        mav.addObject("demandeDetail",demandes);
         return mav;
     }
 

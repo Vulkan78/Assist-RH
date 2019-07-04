@@ -44,22 +44,42 @@
     </div>
     <div>
         <div class="container" style="padding-right:25px;padding-left:22px;">
-            <form>
-                <div class="form-row outline">
-                    <div class="col" style="padding:2em;">
-                        <div class="form-group" style="margin-bottom:0.5em;"><label>Référence</label><input class="form-control form-control-sm" type="text" name="reference" value="839288" readonly=""></div>
-                        <div class="form-group" style="margin-bottom:0.5em;"><label>Thème</label><input class="form-control form-control-sm" type="text" name="theme" value="Qualité de code" readonly=""></div>
-                        <div class="form-group" style="margin-bottom:0.5em;"><label>Description</label><textarea class="form-control form-control-lg" name="description" readonly="" style="font-size:14px;height:14em;">Bonnes pratiques dans l’écriture de programmes logiciels.</textarea></div>
-                    </div>
-                    <div class="col" style="padding:2em;">
-                        <div class="form-group" style="margin-bottom:0.5em;"><label>Date de début</label><input class="form-control form-control-sm" type="text" name="date-debut" value="29 juin 2019" readonly=""></div>
-                        <div class="form-group" style="margin-bottom:0.5em;"><label>Date de demande</label><input class="form-control form-control-sm" type="text" name="date-debut" value="12 juin 2019" readonly=""></div>
-                        <div class="form-group" style="margin-bottom:0.5em;"><label>Durée</label><input class="form-control form-control-sm" type="text" name="ville" value="6 jours" readonly=""></div>
-                        <div class="form-group" style="margin-bottom:0.5em;"><label>Statut</label><span class="badge badge-danger d-table">Refusée</span></div>
-                        <div class="form-group" style="margin-bottom:0.5em;"><label>Motif</label><textarea class="form-control form-control-lg" name="description" readonly="" style="font-size:14px;">Tu participeras plutôt à la prochaine session prévue pour septembre. Douglas</textarea></div>
-                    </div>
-                </div>
-            </form>
+            <c:forEach items="${formationDetail}" var="formationDetail">
+                <c:forEach items="${demandeDetail}" var="demandeDetail">
+                    <form>
+                        <div class="form-row outline">
+                            <div class="col" style="padding:2em;">
+                                <div class="form-group" style="margin-bottom:0.5em;"><label>Référence</label><input class="form-control form-control-sm" type="text" name="reference" value="${formationDetail.id}" readonly=""></div>
+                                <div class="form-group" style="margin-bottom:0.5em;"><label>Thème</label><input class="form-control form-control-sm" type="text" name="theme" value="${formationDetail.theme}" readonly=""></div>
+                                <div class="form-group" style="margin-bottom:0.5em;"><label>Description</label><textarea class="form-control form-control-lg" name="description" readonly="" style="font-size:14px;height:14em;">${formationDetail.description}</textarea></div>
+                            </div>
+                            <div class="col" style="padding:2em;">
+                                <div class="form-group" style="margin-bottom:0.5em;"><label>Date de début</label><input class="form-control form-control-sm" type="text" name="dateDebut" value="${formationDetail.dateDebut}" readonly=""></div>
+                                <div class="form-group" style="margin-bottom:0.5em;"><label>Date de demande</label><input class="form-control form-control-sm" type="text" name="dateDemande" value="${demandeDetail.dateDemande}" readonly=""></div>
+                                <div class="form-group" style="margin-bottom:0.5em;"><label>Durée</label><input class="form-control form-control-sm" type="text" name="ville" value="${formationDetail.duree}" readonly=""></div>
+                                <div class="form-group" style="margin-bottom:0.5em;"><label>Statut</label>
+                                    <c:choose>
+                                    <c:when test="${demandeDetail.statutDemande=='Approuvée'}">
+                                    <span class="badge badge-success">
+                                        </c:when>
+                                        <c:when test="${demandeDetail.statutDemande=='Réalisée'}">
+                                        <span class="badge badge-primary">
+                                        </c:when>
+                                        <c:when test="${demandeDetail.statutDemande=='Demandée'}">
+                                        <span class="badge badge-light">
+                                        </c:when>
+                                        <c:otherwise>
+                                        <span class="badge badge-danger">
+                                        </c:otherwise>
+                                    </c:choose>
+                                    ${demandeDetail.statutDemande}</span>
+                                </div>
+                                <div class="form-group" style="margin-bottom:0.5em;"><label>Motif</label><textarea class="form-control form-control-lg" name="description" readonly="" style="font-size:14px;">Tu participeras plutôt à la prochaine session prévue pour septembre. Douglas</textarea></div>
+                            </div>
+                        </div>
+                    </form>
+                </c:forEach>
+            </c:forEach>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>

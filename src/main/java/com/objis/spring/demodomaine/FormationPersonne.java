@@ -21,7 +21,7 @@ public class FormationPersonne implements Serializable {
     @Column(name = "id")
     public Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "salarie_id", referencedColumnName = "id")
     public Salarie salarie;
 

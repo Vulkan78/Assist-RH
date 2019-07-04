@@ -18,17 +18,19 @@ public class Salarie extends Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Integer id;
+    //public Manager manager;
 
-/*    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FormationPersonne_id", referencedColumnName = "id")
-    public FormationPersonne;*/
 
-/*    private Set<FormationPersonne> formationPersonne = new HashSet<FormationPersonne>(
-            0);
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "Salarie")
-    public Set<FormationPersonne> getFormationPersonne() {
-        return this.formationPersonne;
+/*    public Salarie(String nom, String prenom, String mail, String adresse, String fonction, Date dateEmbauche, String password, Manager manager) {
+        super();
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.mail = mail;
+        this.fonction = fonction;
+        this.dateEmbauche = dateEmbauche;
+        this.password = password;
+        this.manager = new Manager();
     }*/
 
     public Salarie(String nom, String prenom, String mail, String adresse, String fonction, Date dateEmbauche, String password) {

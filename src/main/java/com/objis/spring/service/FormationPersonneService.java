@@ -25,9 +25,9 @@ public class FormationPersonneService {
     private IFormationPersonneDao iFormationPersonneDao;
 
     /**
-     * Recupère les demandes (formationPersonnes) en base
+     * Recupère les demandes (formationPersonne) en base
      *
-     * @return Une liste des demandes (FormationPersonnes)
+     * @return Une liste des demandes (FormationPersonne)
      */
     public List<FormationPersonne> getAll() {
         return iFormationPersonneDao.findAll();
@@ -43,10 +43,10 @@ public class FormationPersonneService {
     }
 
     /**
-     * Récupère le salarie de la base à mettre à jour
+     * Récupère la demande de formation de la base à mettre à jour
      * @param id
-     *              ID du salarié
-     * @return Salarie
+     *              ID de la demande
+     * @return FormationPersonne
      */
     public FormationPersonne getFormationPersonne(Integer id){
         return iFormationPersonneDao.getOne(id);
@@ -79,6 +79,10 @@ public class FormationPersonneService {
     public FormationPersonne valideUpdateFormationPersonne(FormationPersonne formationPersonne) {
         return this.iFormationPersonneDao.save(formationPersonne);
     }
+
+    public FormationPersonne getBySalarieFormation(Salarie salarie, Formation formation){
+        return this.iFormationPersonneDao.findBySalarieAndFormation(salarie, formation);
+}
 
     /*public ArrayList<Formation> getFormationsSalarie(Salarie salarie){
         ArrayList<Formation> listeFormations = this.findBySalarie(salarie);

@@ -2,6 +2,7 @@ package com.objis.spring.service;
 
 import com.objis.spring.demodao.IFormationDao;
 import com.objis.spring.demodomaine.Formation;
+import com.objis.spring.demodomaine.FormationPersonne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +76,16 @@ public class FormationService {
             results.addAll(this.iFormationDao.findByThemeContaining(word));
         }
         return results;
+    }
+
+    /**
+     * Récupère la formation de la base à mettre à jour
+     * @param id
+     *              ID de la formation
+     * @return Formation
+     */
+    public Formation getFormation(Integer id){
+        return iFormationDao.getOne(id);
     }
 
 
