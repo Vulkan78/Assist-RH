@@ -46,7 +46,7 @@
         <div class="container" style="padding-right:25px;padding-left:22px;">
             <c:forEach items="${formationDetail}" var="formationDetail">
                 <c:forEach items="${demandeDetail}" var="demandeDetail">
-                    <form>
+                    <form >
                         <div class="form-row outline">
                             <div class="col" style="padding:2em;">
                                 <div class="form-group" style="margin-bottom:0.5em;"><label>Référence</label><input class="form-control form-control-sm" type="text" name="reference" value="${formationDetail.id}" readonly=""></div>
@@ -74,7 +74,7 @@
                                     </c:choose>
                                     ${demandeDetail.statutDemande}</span>
                                 </div>
-                                <div class="form-group" style="margin-bottom:0.5em;"><label>Motif</label><textarea class="form-control form-control-lg" name="description" readonly="" style="font-size:14px;">Tu participeras plutôt à la prochaine session prévue pour septembre. Douglas</textarea></div>
+
                             </div>
                         </div>
                     </form>
