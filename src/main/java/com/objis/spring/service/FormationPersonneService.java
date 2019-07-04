@@ -82,7 +82,12 @@ public class FormationPersonneService {
 
     public FormationPersonne getBySalarieFormation(Salarie salarie, Formation formation){
         return this.iFormationPersonneDao.findBySalarieAndFormation(salarie, formation);
-}
+    }
+
+    public FormationPersonne findbyId(Integer id) {
+        return iFormationPersonneDao.getOne(id);
+    }
+
 
     /*public ArrayList<Formation> getFormationsSalarie(Salarie salarie){
         ArrayList<Formation> listeFormations = this.findBySalarie(salarie);

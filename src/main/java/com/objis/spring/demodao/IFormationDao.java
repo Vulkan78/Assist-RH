@@ -10,4 +10,5 @@ public interface IFormationDao extends JpaRepository<Formation, Integer> {
 
     List<Formation> findByThemeContaining(String keyword);
     List<Formation> findByDateDebutAfter(Date date);
+
 }

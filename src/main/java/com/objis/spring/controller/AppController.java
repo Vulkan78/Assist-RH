@@ -76,7 +76,7 @@ public class AppController {
                 if (password.equals(manager.getPassword())) {
 
                     session.setAttribute("id", managers.get(0).getId());
-                    MAV.setViewName("index");
+                    MAV.setViewName("index-manager");
                 } else {
                     MAV.setViewName("connexion");
                 }
@@ -249,8 +249,10 @@ public class AppController {
      */
     @GetMapping("/formation-detail")
     public ModelAndView formationDetail(Integer id, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+
         ModelAndView mav = new ModelAndView("formation-detail");
         HttpSession session = request.getSession(true);
+
         Integer idUser = (int)session.getAttribute("id");
         Salarie salarie = this.salarieService.getSalarie(idUser);
         Formation formation = this.formationService.getFormation(id);
@@ -258,12 +260,31 @@ public class AppController {
         FormationPersonne demande = this.formationPersonneService.getBySalarieFormation(salarie, formation);
         ArrayList<Formation> formations = new ArrayList();
         formations.add(formation);
+
         ArrayList<FormationPersonne> demandes = new ArrayList();
         Hibernate.initialize(demande);
         demandes.add(demande);
 
         mav.addObject("formationDetail",formations);
         mav.addObject("demandeDetail",demandes);
+        return mav;
+    }
+
+    /**
+     *  Affiche les détails de la formation
+     */
+    @GetMapping("/catalogue-detail")
+    public ModelAndView catalogueDetail(@RequestParam Integer id) {
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("catalogue-detail");
+        //Premier onglet
+        Formation formation = this.formationService.findById(id);
+        ArrayList<Formation> formations = new ArrayList();
+        formations.add(formation);
+        System.out.println(formation);
+        System.out.println(formations);
+        mav.addObject("formationDetail",formations);
         return mav;
     }
 
@@ -316,4 +337,81 @@ public class AppController {
         return "redirect:/formations.html";
     }
 
+    /**
+     * Affiche la page de gestion des compétences du service RH
+     */
+    @RequestMapping({"/mg-salaries"})
+    public ModelAndView mgSalarie (){
+        ModelAndView MAV = new ModelAndView();
+        MAV.setViewName("mg-salaries");
+        //Premier onglet
+        MAV.addObject("salarieList",this.salarieService.getAll());
+        return MAV;
+    }
+
+    /**
+     * Affiche les demandes de formation en cours du salarié
+     */
+    @RequestMapping({"/mg-demandes"})
+    public ModelAndView managerDemandes (HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+        ModelAndView MAV = new ModelAndView();
+        MAV.setViewName("mg-demandes");
+        HttpSession session = request.getSession(true);
+        Integer id = (int)session.getAttribute("id");
+        Salarie salarie = this.salarieService.getSalarie(id);
+        //Deuxieme onglet
+        List<FormationPersonne> listeFormationPersonne = this.iFormationPersonneDao.findBySalarieAndStatutDemande(salarie, "Demandée");
+        MAV.addObject("formationPersonneListStatut",listeFormationPersonne);
+        return MAV;
+    }
+
+    /**
+     * Affiche l'historique des demandes de formation du salarié
+     */
+    @RequestMapping({"/mg-historique"})
+    public ModelAndView managerHistorique (HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+        ModelAndView MAV = new ModelAndView();
+        MAV.setViewName("mg-historique");
+        HttpSession session = request.getSession(true);
+        Integer id = (int)session.getAttribute("id");
+        Salarie salarie = this.salarieService.getSalarie(id);
+        //Troisième onglet
+        MAV.addObject("formationPersonneList",this.iFormationPersonneDao.findBySalarieAndStatutDemandeNot(salarie, "Demandée"));
+        return MAV;
+    }
+
+
+    /**
+     *  Affiche les détails de la formation
+     */
+    @GetMapping("/mg-detail")
+    public ModelAndView managerDetail(Integer id, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        ModelAndView mav = new ModelAndView("mg-detail");
+        HttpSession session = request.getSession(true);
+        Integer idUser = (int)session.getAttribute("id");
+        Salarie salarie = this.salarieService.getSalarie(idUser);
+        Formation formation = this.formationService.getFormation(id);
+
+        FormationPersonne demande = this.formationPersonneService.getBySalarieFormation(salarie, formation);
+        ArrayList<Formation> formations = new ArrayList();
+        formations.add(formation);
+        ArrayList<FormationPersonne> demandes = new ArrayList();
+        Hibernate.initialize(demande);
+        demandes.add(demande);
+
+        mav.addObject("formationDetail",formations);
+        mav.addObject("demandeDetail",demandes);
+        return mav;
+    }
+
+    /**
+     *  Affiche les détails de la formation
+     */
+    @PostMapping("/approuverformation")
+    public ModelAndView approuverFormation(@RequestParam Integer id ,@RequestParam Integer idDemande, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        ModelAndView mav = new ModelAndView("mg-demandes");
+        FormationPersonne demande = this.formationPersonneService.findbyId(id);
+        demande.setStatutDemande("Approuvée");
+        return mav;
+    }
 }

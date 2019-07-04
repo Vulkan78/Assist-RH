@@ -33,6 +33,15 @@ public class FormationService {
     }
 
     /**
+     * Recupère les formations en base
+     *
+     * @return Une liste de Formations
+     */
+    public Formation findById(Integer id) {
+        return iFormationDao.getOne(id);
+    }
+
+    /**
      * Injecte la formation en base
      *
      * @param newformation

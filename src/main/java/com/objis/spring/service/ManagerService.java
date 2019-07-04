@@ -56,6 +56,16 @@ public class ManagerService {
     }
 
     /**
+     * Récupère le salarie de la base à mettre à jour
+     * @param id
+     *              ID du salarié
+     * @return Salarie
+     */
+    public Manager getManager(Integer id){
+        return iManagerDao.getOne(id);
+    }
+
+    /**
      * Met à jour le manager dans la base
      * @param manager
      *
