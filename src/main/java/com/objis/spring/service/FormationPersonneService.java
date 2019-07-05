@@ -88,6 +88,10 @@ public class FormationPersonneService {
         return iFormationPersonneDao.getOne(id);
     }
 
+    public void demanderFormation(FormationPersonne formationpersonne){
+        this.iFormationPersonneDao.save(formationpersonne);
+    }
+
 
     /*public ArrayList<Formation> getFormationsSalarie(Salarie salarie){
         ArrayList<Formation> listeFormations = this.findBySalarie(salarie);

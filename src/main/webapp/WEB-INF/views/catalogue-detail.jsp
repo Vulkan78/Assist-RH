@@ -46,10 +46,10 @@
     <div class="container" style="padding-right:25px;padding-left:22px;">
         <c:forEach items="${formationDetail}" var="formationDetail">
 
-                <form >
+            <form method="Post" action="demandeformation.html">
                     <div class="form-row outline">
                         <div class="col" style="padding:2em;">
-                            <div class="form-group" style="margin-bottom:0.5em;"><label>Référence</label><input class="form-control form-control-sm" type="text" name="reference" value="${formationDetail.id}" readonly=""></div>
+                            <div class="form-group" style="margin-bottom:0.5em;"><label>Référence</label><input class="form-control form-control-sm" type="text" name="id" value="${formationDetail.id}" readonly=""></div>
                             <div class="form-group" style="margin-bottom:0.5em;"><label>Thème</label><input class="form-control form-control-sm" type="text" name="theme" value="${formationDetail.theme}" readonly=""></div>
                             <div class="form-group" style="margin-bottom:0.5em;"><label>Description</label><textarea class="form-control form-control-lg" name="description" readonly="" style="font-size:14px;height:14em;">${formationDetail.description}</textarea></div>
                         </div>
@@ -57,7 +57,7 @@
                             <div class="form-group" style="margin-bottom:0.5em;"><label>Date de début</label><input class="form-control form-control-sm" type="text" name="dateDebut" value="${formationDetail.dateDebut}" readonly=""></div>
                             <div class="form-group" style="margin-bottom:0.5em;"><label>Date de demande</label><input class="form-control form-control-sm" type="text" name="dateDemande" value="" readonly=""></div>
                             <div class="form-group" style="margin-bottom:0.5em;"><label>Durée</label><input class="form-control form-control-sm" type="text" name="ville" value="${formationDetail.duree}" readonly=""></div>
-
+                            <div class="form-group" style="margin-bottom:0.5em;"><input type="submit" value="Participer" ></div>
 
                         </div>
                     </div>

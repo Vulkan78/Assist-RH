@@ -289,6 +289,24 @@ public class AppController {
     }
 
     /**
+     *  Demander la formation
+     */
+    @PostMapping("/demandeformation")
+    public String demandeFormation(@RequestParam Integer id, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession(true);
+        Integer idSalarie = (int)session.getAttribute("id");
+
+        Salarie salarie = this.salarieService.getSalarie(idSalarie);
+        Formation formation = this.formationService.getFormation(id);
+        FormationPersonne formationpersonne = new FormationPersonne (salarie, formation, "Demandée", new Date(), 0);
+        this.formationPersonneService.demanderFormation(formationpersonne);
+
+
+        return "redirect:/formation-demandes.html";
+    }
+
+    /**
      * Valide la création de la formation et l'injecte dans la base
      */
     @RequestMapping(method = RequestMethod.POST, path = "/rh-formation")
@@ -385,19 +403,16 @@ public class AppController {
      *  Affiche les détails de la formation
      */
     @GetMapping("/mg-detail")
-    public ModelAndView managerDetail(Integer id, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    public ModelAndView managerDetail(@RequestParam Integer id){//}, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         ModelAndView mav = new ModelAndView("mg-detail");
-        HttpSession session = request.getSession(true);
-        Integer idUser = (int)session.getAttribute("id");
-        Salarie salarie = this.salarieService.getSalarie(idUser);
-        Formation formation = this.formationService.getFormation(id);
-
-        FormationPersonne demande = this.formationPersonneService.getBySalarieFormation(salarie, formation);
+        FormationPersonne formationPersonne = this.formationPersonneService.getFormationPersonne(id);
+        Formation formation = formationPersonne.getFormation();
+        //Salarie salarie = formationPersonne.getSalarie();
         ArrayList<Formation> formations = new ArrayList();
         formations.add(formation);
         ArrayList<FormationPersonne> demandes = new ArrayList();
-        Hibernate.initialize(demande);
-        demandes.add(demande);
+        Hibernate.initialize(formationPersonne);
+        demandes.add(formationPersonne);
 
         mav.addObject("formationDetail",formations);
         mav.addObject("demandeDetail",demandes);
@@ -408,9 +423,9 @@ public class AppController {
      *  Affiche les détails de la formation
      */
     @PostMapping("/approuverformation")
-    public ModelAndView approuverFormation(@RequestParam Integer id ,@RequestParam Integer idDemande, HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+    public ModelAndView approuverFormation(@RequestParam Integer idDemande){
         ModelAndView mav = new ModelAndView("mg-demandes");
-        FormationPersonne demande = this.formationPersonneService.findbyId(id);
+        FormationPersonne demande = this.formationPersonneService.findbyId(idDemande);
         demande.setStatutDemande("Approuvée");
         return mav;
     }

@@ -25,7 +25,7 @@
 <div>
     <div class="container">
         <div class="row">
-            <div class="col-md-12"><a class="btn btn-dark back" role="button" href="index.html"><i class="fa fa-chevron-left fa-sm"></i></a>
+            <div class="col-md-12"><a class="btn btn-dark back" role="button" href="index-manager.html"><i class="fa fa-chevron-left fa-sm"></i></a>
                 <h3 class="d-inline page-title" style="margin:0;margin-left:0.3em;"><strong>Salariés</strong></h3>
             </div>
         </div>
@@ -48,7 +48,7 @@
         <div class="row outline">
             <div class="col outline" style="padding:2em;">
                 <form method="post" action="search.html">
-                    <div class="form-group d-flex"><input class="form-control squared-border-right" type="search" placeholder="Rechercher un thème..." style="max-width:20em;" name="keyword"><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></div>
+                    <div class="form-group d-flex"><input class="form-control squared-border-right" type="search" placeholder="Rechercher un salarié..." style="max-width:20em;" name="keyword"><button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button></div>
                     <div class="table-responsive">
                         <table class="table table-striped table-dark">
                             <thead>

@@ -25,7 +25,7 @@
 <div>
     <div class="container">
         <div class="row">
-            <div class="col-md-12"><a class="btn btn-dark back" role="button" href="index.html"><i class="fa fa-chevron-left fa-sm"></i></a>
+            <div class="col-md-12"><a class="btn btn-dark back" role="button" href="index-manager.html"><i class="fa fa-chevron-left fa-sm"></i></a>
                 <h3 class="d-inline page-title" style="margin:0;margin-left:0.3em;"><strong>Salariés</strong></h3>
             </div>
         </div>

@@ -24,7 +24,6 @@
                             <div class="col" style="padding:2em;">
                                 <div class="form-group"><label>Thème</label><input class="form-control form-control-sm" type="text" name="theme" required=""></div>
                                 <div class="form-group"><label>Durée</label><input class="form-control form-control-sm" type="text" name="duree" required=""></div>
-                                <div class="form-group"><label>Téléphone</label><input class="form-control form-control-sm" type="tel" name="telephone"></div>
                             </div>
                             <div class="col" style="padding:2em;">
                                 <div class="form-group"><label>Date de début</label><input class="form-control form-control-sm" type="date" name="datedebut" required=""></div>
