@@ -3,7 +3,6 @@ Logiciel de Gestion Ressources Humaines
 Guide d'installation / d'utilisation de l'application Java Assit-RH
 
 Vérifiez que le livrable est composé des éléments suivants :
-- Assist-RH : fichier SQL comportant la base de données
 - Dossier "src" : code source de l'application
 - Dossier "UML" : contient les diagrammes UML suivant : classes, déploiement, et cas d'utilisation, d’activité, séquence + intégration continue + le sitemap
 - Dossier "Javadoc"
