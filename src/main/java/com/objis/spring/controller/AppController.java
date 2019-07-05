@@ -429,4 +429,14 @@ public class AppController {
         demande.setStatutDemande("Approuvée");
         return mav;
     }
+
+    /**
+     * Affiche la d'accueil manager
+     */
+    @RequestMapping({"/index-manager"})
+    public ModelAndView indexManager (){
+        ModelAndView MAV = new ModelAndView();
+        MAV.setViewName("index-manager");
+        return MAV;
+    }
 }
